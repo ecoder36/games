@@ -81,9 +81,10 @@ $(document).ready(function() {
         </div>
         <!-- /.row -->
 
-        <?php foreach($games as $game) : ?>
+
         <!-- Projects Row -->
         <div class="row">
+            <?php foreach($games as $game) : ?>
             <div class="col-md-4 portfolio-item">
                 <div class="shadow ">
                     <div class="well white">
@@ -96,8 +97,9 @@ $(document).ready(function() {
                     </div>
                 </div>
             </div>
+            <?php endforeach; ?>
         </div>
-        <?php endforeach; ?>
+
         <hr>
 
         <!-- Pagination -->
