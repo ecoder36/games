@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://framework-testaa.c9users.io/iogames/';
+$config['base_url'] = 'https://clacite-mrsamer.c9users.io/projects/iogames/';
 
 /*
 |--------------------------------------------------------------------------

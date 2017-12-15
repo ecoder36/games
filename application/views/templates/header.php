@@ -11,7 +11,7 @@
         <meta name="author" content="">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!--<link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">-->
-        <link rel="stylesheet" href="https://bootswatch.com/3/flatly/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!--<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>-->
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
         
@@ -61,33 +61,35 @@
     <!--Test JS File-->
     <!--<button onclick="myFunction()">Try it</button>-->
     <!-- Header -->
-		<header id="header" class="alt">    
-      <div class="navbar-wrapper">
-          <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-              <div class="navbar-header navbar-right">
-                <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-              </div>
-                  
-              <div id="navbar" class="collapse navbar-collapse">
-            
-               
-                  <ul class="nav navbar-nav navbar-right">
-                    
-                  <li><a href="<?php echo base_url(); ?>admin">  games </a></li>
-                  <li><a href="<?php echo base_url(); ?>games/add"> Add New game  </a></li>
-                  
-              
-          </ul>
-              </div><!--/.nav-collapse -->
+		<header id="header" class="alt">   
+		
+		        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">IOGames</a>
             </div>
-          </nav>
-      </div>
+            <div id="navbar" class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="<?php echo base_url(); ?>admin">  games </a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                  <a href="<?php echo base_url(); ?>games/add">
+                  
+                    <span class="glyphicon glyphicon-plus"></span>
+                  
+                  </a>
+                  </li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
     </header> <!-- /.header -->
     
     
