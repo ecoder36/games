@@ -88,7 +88,6 @@
    text-align: center;
    }
 
-
    /* iframe */
 
    .iframe {
@@ -124,9 +123,9 @@
    color: white;
    background: #3B4658;
    display: block;
-   padding: 15px;
+   padding: 1px;
    text-align: center;
-   border-bottom: 3px solid #131C28;
+   border-bottom: 2px solid #131C28;
    }
 
    .iframe-header a:hover,
@@ -175,13 +174,21 @@
    border: none;
    }
 
+   /*.iframe-full-screen .iframe iframe {*/
+   /*position: absolute;*/
+   /*height: 100%;*/
+   /*width: 100%;*/
+   /*border: none;*/
+   /*}*/
+
    .iframe-full-screen .iframe iframe {
-   position: absolute;
-   height: 100%;
+   position: fixed;
+   top: 4%;
+   height: 96%;
    width: 100%;
    border: none;
    }
-
+   
    .wrapper {
    max-width: 1000px;
    margin: 20px auto;
@@ -194,7 +201,6 @@
    }
    }
    </style>
-
     <script>
 //     function makeFullScreen() {
 //     document.getElementsByTagName("iframe")[0].className = "fullScreen";
@@ -202,10 +208,7 @@
 //     requestFullScreen(elem);
 // }
         document.getElementsByTagName("html")[0].className = "js";
-
     </script>
-
-
 <!-- BEGIN PAGE BREADCRUMBS -->
     <ul class="page-breadcrumb breadcrumb">
         <li>
@@ -217,11 +220,8 @@
         </li>
     </ul>
 <!-- END PAGE BREADCRUMBS -->
-
-
     <!-- Page Content -->
     <div class="container">
-
         <!-- Page Header -->
         <div class="row">
             <div class="col-lg-12">
@@ -231,7 +231,6 @@
             </div>
         </div>
         <!-- /.row -->
-
         <!-- Projects Row -->
         <div class="row">
             <div class="col-md-10 col-md-offset-1 portfolio-item">
@@ -245,47 +244,36 @@
             </div>
         </div>
         <!-- /.row -->
-
         <hr>
-
         <!-- Pagination -->
-
-
 <div class="main">
-<div class="row content">
-
-   
-<hr>	    
-     <div class="well content"><h3>Keywords</h3>
-        <div class="row">
-    		<?php foreach($keywords as $key) : ?>
-    		<?php if($key['level']!=3) : ?>
-    		 <div class="col-md-6"> 
-    		    <a class="btn btn-default btn-sm" href="<?php echo base_url(url_title(mb_substr($key['url_title'], 0, 120))); ?>"> <?php echo $key['keyword']; ?> </a>
-    	        <br><br>
-              </div>
-    		<?php endif ?>
-    		<?php endforeach; ?>
-    	<hr>
+    <div class="row content">
+    <hr>	    
+         <div class="well content"><h3>Keywords</h3>
+            <div class="row">
+        		<?php foreach($keywords as $key) : ?>
+        		<?php if($key['level']!=3) : ?>
+        		 <div class="col-md-6"> 
+        		    <a class="btn btn-default btn-sm" href="<?php echo base_url(url_title(mb_substr($key['url_title'], 0, 120))); ?>"> <?php echo $key['keyword']; ?> </a>
+        	        <br><br>
+                  </div>
+        		<?php endif ?>
+        		<?php endforeach; ?>
+        	<hr>
+            </div>
+        </div>
+        <div class="well content"><h3>category</h3>
+           <div class="row">
+                <?php foreach($keywords as $key) : ?>
+        		<?php if($key['level']==3) : ?>
+                   <div class="col-md-6"> 
+        	        <a class="btn btn-default btn-sm" href="<?php echo base_url("category/".$key['url_title']); ?>"> <?php echo $key['keyword']; ?> </a>
+        	        <br><br>
+                   </div>
+                <?php endif ?>
+        		<?php endforeach; ?>
+          </div>
         </div>
     </div>
-    
-    
-    
-    
-    <div class="well content"><h3>category</h3>
-       <div class="row">
-            <?php foreach($keywords as $key) : ?>
-    		<?php if($key['level']==3) : ?>
-               <div class="col-md-6"> 
-    	        <a class="btn btn-default btn-sm" href="<?php echo base_url("category/".$key['url_title']); ?>"> <?php echo $key['keyword']; ?> </a>
-    	        <br><br>
-               </div>
-            <?php endif ?>
-    		<?php endforeach; ?>
-      </div>
-    </div>
-
-</div>
 </div>
 
