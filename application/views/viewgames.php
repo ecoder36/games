@@ -1,26 +1,32 @@
+
+
+<!-- BEGIN PAGE BREADCRUMBS -->
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            <a href="<?php echo base_url(); ?>games/mainpage"> mainpage </a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span> <?php echo $cat ; ?> </span>
+        </li>
+    </ul>
+<!-- END PAGE BREADCRUMBS -->
+
 <div class="well content">
-    <table  class="display table" cellspacing="0" width="100%" dir="rtl">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>link</th>
-                <th> name</th>
-                <th> category</th>
-                <th>img </th>
-                <th>  open  </th>
-               
-            </tr>
-        </thead>
-        <tbody>
-        <?php foreach($games as $game) : ?>
-            <tr>
-                <td><?php echo $game['gameid']; ?> </td>
-                <td><?php echo $game['link']; ?> </td>
-                <td><?php echo $game['name']; ?> </td>
-                <td><?php echo $game['keyword']; ?> </td>
-                <td width="121"><img height="122" class="post-thumb" src="<?php echo base_url(); ?>assets/images/games/<?php if($game['img']!=NULL){ echo $game['img']; }else{echo 'noimage.jpg'; } ?>"></td>
-                <td><a class="btn btn-default btn-sm" href="<?php echo base_url(url_title($game['name'])); ?>">  open </a></td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
+    <div class="row">
+            <?php foreach($games as $game) : ?>
+            <div class="col-md-4 portfolio-item">
+                <div class="shadow ">
+                    <div class="well white">
+                        <a href="<?php echo base_url($game['url']); ?>">
+                            <img class="img-responsive" src="<?php echo base_url(); ?>assets/images/games/<?php if($game['img']!=NULL){ echo $game['img']; }else{echo 'noimage.jpg'; } ?>" width="700px" height="400px" alt="">
+                        </a>
+                        <h3>
+                            <a href="<?php echo base_url(url_title($game['url'])); ?>"><?php echo $game['name']; ?></a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+    </div>
 </div>

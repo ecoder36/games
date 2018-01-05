@@ -83,16 +83,17 @@ $(document).ready(function() {
 
 
         <!-- Projects Row -->
+        <span hidden>
         <div class="row">
             <?php foreach($games as $game) : ?>
             <div class="col-md-4 portfolio-item">
                 <div class="shadow ">
                     <div class="well white">
-                        <a href="<?php echo base_url($game['url_title']); ?>">
+                        <a href="<?php echo base_url("admin/".$game['url_title']); ?>">
                             <img class="img-responsive" src="<?php echo base_url(); ?>assets/images/games/<?php if($game['img']!=NULL){ echo $game['img']; }else{echo 'noimage.jpg'; } ?>" width="700px" height="400px" alt="">
                         </a>
                         <h3 hidden>
-                            <a href="<?php echo base_url($game['url_title']); ?>">Game Name</a>
+                            <a href="<?php echo base_url("admin/".$game['url_title']); ?>">Game Name</a>
                         </h3>
                     </div>
                 </div>
@@ -130,10 +131,11 @@ $(document).ready(function() {
                 </ul>
             </div>
         </div>
+        </span>
         <!-- /.row -->
     
     
-    <span hidden>
+    <span>
     <div id="div_print">
     <table class="gamesTable display" cellspacing="0" width="100%" dir="rtl">
         <thead>
@@ -155,7 +157,7 @@ $(document).ready(function() {
                 <td><?php echo $game['name']; ?> </td>
                 <td><?php echo $game['keyword']; ?> </td>
                 <td width="121"><img height="122" class="post-thumb" src="<?php echo base_url(); ?>assets/images/games/<?php if($game['img']!=NULL){ echo $game['img']; }else{echo 'noimage.jpg'; } ?>"></td>
-                <td><a class="btn btn-default btn-sm" href="<?php echo base_url($game['url_title']); ?>">  open </a></td>
+                <td><a class="btn btn-default btn-sm" href="<?php echo base_url("admin/".$game['url_title']); ?>">  open </a></td>
                 <td class="dontprint">
                 <a class="btn-link text-danger" onclick="return confirm(' <?php echo $game['name']; ?>')" href="<?php echo base_url(); ?>games/delete/<?php echo $game['gameid']; ?>"> Delete</a>
                 </td>

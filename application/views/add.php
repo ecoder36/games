@@ -30,7 +30,15 @@
         			<input type="text" class="form-control" value="<?php echo set_value('name'); ?>" name="name" placeholder="الاسم">
         		</div>
         	
-        	
+        	    <div class="form-group">
+        			<label>   category</label>
+        			<select name="category">
+        			    <option value="">select</option>
+        			    <?php foreach($categories as $category) : ?>
+                        <option value="<?php echo $category['keyid']; ?>"><?php echo $category['keyword']; ?></option>
+                        <?php endforeach; ?>
+        			</select>
+        		</div>
         		<div class="col-md-12">
                     <div class="form-group">
                         <label for="exampleInputFile">img</label>

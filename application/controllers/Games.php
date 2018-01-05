@@ -1,13 +1,83 @@
 <?php
 	class Games extends CI_Controller{
 
-	public function add(){	
 
+	    public function mainpage(){	
+			$data['title'] = 'games';
+			$data['games'] = $this->games_model->get_games() ;
+			$data['categories'] = $this->games_model->get_categories() ;
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('showGames', $data);
+			$this->load->view('templates/footer');
+			
+		}
+		
+		public function gamepage($slug = NULL){	
+			$data['categories'] = $this->games_model->get_categories() ;
+			$data['post'] = $this->games_model->get_game_byname($slug);
+		//	print_r($data['post']);die();
+			$post_id = $data['post']['gameid'];
+			$level = $data['post']['level'];
+			//	echo url_title($slug) ;die();
+			if($level != 1){
+				redirect('games/showgame2/'.$slug);
+			}
+			$data['keywords'] = $this->games_model->get_keywords2($post_id);
+		
+		//	print_r($data['files']);die();
+		//	$data['comments'] = $this->comment_model->get_comments($post_id);
+			if(empty($data['post'])){
+				//show_404();
+				$this->session->set_flashdata('danger', 'no post 1');
+				redirect('games/mainpage');
+			}
+			//$data['title'] = $data['post']['name'];
+			$data['title'] = $slug;
+			$this->load->view('templates/header', $data);
+			$this->load->view('showGame', $data);
+			$this->load->view('templates/footer');
+			
+		}
+		public function showgame2($slug = NULL){
+				//Check login
+			 //echo ("$slug");
+			 //die();
+			$data['post'] = $this->games_model->get_game_by_keyword($slug);
+				$post_id = $data['post']['gameid'];
+			$data['keywords2'] = $this->games_model->get_keywords2($post_id);
+		
+		//	print_r($data['files']);die();
+		//	$data['comments'] = $this->comment_model->get_comments($post_id);
+			if(empty($data['post'])){
+				//show_404();
+				$this->session->set_flashdata('danger', 'no post 2');
+				redirect('games/mainpage');
+			}
+			//$data['title'] = $data['post']['name'];
+			$data['title'] = $slug;
+			$this->load->view('templates/header', $data);
+			$this->load->view('showGame', $data);
+			$this->load->view('templates/footer');
+		}
+		
+		public function category_games($cat = NULL){	
+				//Check login
+		
+			$data['title'] = ' games';
+			$data['games'] = $this->games_model->get_games_in_categor($cat) ;
+		//	print_r($data['games']);die();
+			$data['cat'] = $cat;
+			$this->load->view('templates/header', $data);
+			$this->load->view('viewgames', $data);
+			$this->load->view('templates/footer');
+		}
+		
+
+	public function add(){	
 			//Check login
-		// if(!$this->session->userdata('logged_in_1')){
-		// 		redirect('users/login');
-		// 	}
-			 
+		    if(!$this->session->userdata('logged_in_1')){redirect('log/login');}
+			$data['categories'] = $this->games_model->get_categories() ;
 			$data['title'] = 'Add New Game' ;
 			//$data['file']  = $this->property_model->get_files();
 	     	//to check if get from database working ---- you can use print_r($data['posts']);
@@ -17,11 +87,14 @@
 		}
 	
 	public function create(){
-
+//Check login
+		    if(!$this->session->userdata('logged_in_1')){redirect('log/login');}
 	        $data['title'] = ' add game';
+	        $data['categories'] = $this->games_model->get_categories() ;
 	  //      $this->form_validation->set_rules('title', 'Title', 'required');
 			$this->form_validation->set_rules('name', 'Name', 'trim|required|min_length[1]|max_length[30]|is_unique[games.name]');
 			$this->form_validation->set_rules('link', 'Link', 'trim|required|valid_url|prep_url');
+			$this->form_validation->set_rules('category','Category','trim|required|min_length[1]|max_length[30]');
 			if($this->form_validation->run() === FALSE){
 	        	$this->load->view('templates/header', $data);
 				$this->load->view('add', $data);
@@ -46,9 +119,15 @@
 						$this->games_model->create_game($post_image);
 						$g_id =	$this->db->insert_id('gameid');
 						$this->games_model->create_first_keyword($g_id);
+						
+						$id =	$this->input->post('category');
+						$data['key'] = $this->games_model->get_category($id);
+					
+						$url_title	= $data['key']['url_title'];
+						$name		= $data['key']['keyword'];
+						$this->games_model->create_more_category($g_id,$url_title,$name);
+						
 						// Set message
-					    
-					    
 					    $this->session->set_flashdata('success', 'Added successfuly');
 					  
 						redirect('games/add');
@@ -69,20 +148,11 @@
 			$this->load->view('templates/footer');
 		}
 		
-		public function category_games($cat = NULL){	
-				//Check login
-		
-			$data['title'] = ' games';
-			$data['games'] = $this->games_model->get_games_in_categor($cat) ;
-
-			$this->load->view('templates/header', $data);
-			$this->load->view('viewgames', $data);
-			$this->load->view('templates/footer');
-		}
+	
 	
 		public function view_id($id = NULL ,$slug = NULL){
 				//Check login
-			 
+		    if(!$this->session->userdata('logged_in_1')){redirect('log/login');}
 			$data['post'] = $this->games_model->get_game($id);
 				$post_id = $data['post']['gameid'];
 			$data['keywords2'] = $this->games_model->get_keywords2($post_id);
@@ -103,6 +173,7 @@
 	
 		public function view($slug = NULL){
 				//Check login
+		    if(!$this->session->userdata('logged_in_1')){redirect('log/login');}
 			$data['categories'] = $this->games_model->get_categories() ;
 			$data['post'] = $this->games_model->get_game_byname($slug);
 			$post_id = $data['post']['gameid'];
@@ -128,7 +199,8 @@
 		}
 		
 		public function view3($slug = NULL){
-				//Check login
+			//Check login
+		    if(!$this->session->userdata('logged_in_1')){redirect('log/login');}
 			 
 			$data['post'] = $this->games_model->get_game_by_keyword($slug);
 				$post_id = $data['post']['gameid'];
@@ -150,7 +222,8 @@
 		
 		
 		public function addkeyword(){
-
+//Check login
+		    if(!$this->session->userdata('logged_in_1')){redirect('log/login');}
 	        $data['title'] = ' add keyword';
 	  //      $this->form_validation->set_rules('title', 'Title', 'required');
 			$this->form_validation->set_rules('keyword', 'Name', 'required');
@@ -170,7 +243,8 @@
 				}
 				
 			public function addcategory(){
-
+//Check login
+		    if(!$this->session->userdata('logged_in_1')){redirect('log/login');}
 	        $data['title'] = 'add category';
 	 // echo "a"; die();
 			//$this->form_validation->set_rules('category', 'Category', 'trim|required|min_length[1]|max_length[30]');
@@ -200,7 +274,8 @@
 				
 				
 			public function add_more_category(){
-
+//Check login
+		    if(!$this->session->userdata('logged_in_1')){redirect('log/login');}
 	        $data['title'] = 'add more category';
 	 // echo "a"; die();
 	 		$id =	$this->input->post('category');
@@ -232,7 +307,8 @@ $data['key'] = $this->games_model->get_category($id);
 				}	
 				
 			public function delete($p_id){
-				//Check login
+			//Check login
+		    if(!$this->session->userdata('logged_in_1')){redirect('log/login');}
 		
 				$files = $this->games_model->get_files($p_id);
 				foreach($files as $file) : 

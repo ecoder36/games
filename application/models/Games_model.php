@@ -9,8 +9,9 @@
 		public function create_game($img){
 		//	$slug = url_title($this->input->post('title'));// i keep it to learn how to use variable
 			$data = array(
-			    'link'     => $this->input->post('link'),
+			    'link'   => $this->input->post('link'),
 			    'name'   => $this->input->post('name'),
+			    'url'    => url_title($this->input->post('name')),
 			    'img' => $img
 
 			//	'slug' => $slug, // i keep it to learn how to use variable

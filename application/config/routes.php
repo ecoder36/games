@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 //$route['default_controller'] = 'welcome';
 
- $route['default_controller'] = 'games/admin';
+ $route['default_controller'] = 'games/mainpage';
   $route['admin'] = 'games/admin';
    $route['games/main'] = 'games/admin';
  
@@ -80,8 +80,10 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 //$route['(:num)'] = 'games/view/$1/$2';
-$route['(:any)'] = 'games/view/$1';
 
+$route['(:any)'] = 'games/gamepage/$1';
+$route['ad/(:any)'] = 'games/showgame2/$1';
+$route['admin/(:any)'] = 'games/view/$1';
 $route['category/(:any)'] = 'games/category_games/$1';
 
 

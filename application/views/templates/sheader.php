@@ -62,26 +62,31 @@
     <!--<button onclick="myFunction()">Try it</button>-->
     <!-- Header -->
 		<header id="header" class="alt">   
-		      <nav class="navbar navbar-default navbar-static-top">
+		
+		        <nav class="navbar navbar-default navbar-static-top">
           <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="<?php echo base_url(); ?>admin">IOGames</a>
+            </div>
             <div id="navbar" class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
-                <li><a class="navbar-brand" href="<?php echo base_url(); ?>">  IOGames </a></li>
-              </ul>
-               <?php if($this->session->userdata('logged_in_1')):?>
-              <ul class="nav navbar-nav">
-                <li><a class="navbar-brand" href="<?php echo base_url(); ?>admin">Admin IOGames</a></li>
+                <li><a href="<?php echo base_url(); ?>admin">  games </a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li>
                   <a href="<?php echo base_url(); ?>games/add">
+                  
                     <span class="glyphicon glyphicon-plus"></span>
+                  
                   </a>
                   </li>
-                  <li><a href="<?php echo base_url(); ?>log/logout"> logout    </a></li>
               </ul>
-              
-              <?php endif; ?>
             </div><!--/.nav-collapse -->
           </div>
         </nav>
